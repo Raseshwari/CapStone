@@ -1,8 +1,11 @@
 from py_jira import py_jira_functions
+from simple_analysis_menu import simple_analysis_functions
 
 def menu(selected_option):
     if selected_option == '1':
         py_jira_functions()
+    if selected_option == '2':
+        simple_analysis_functions()
     elif selected_option == '5':
         exit()
     else:
