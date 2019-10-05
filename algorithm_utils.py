@@ -17,27 +17,39 @@ from pm4py.visualization.heuristics_net import factory as hn_vis_factory
 from pm4py.algo.discovery.heuristics import factory as heuristics_miner
 import pandas as pd
 def generate_dataframe(filename):
-    # import csv into pandas dataframe by specifying the sep - seperator
-    dataframe = csv_import_adapter.import_dataframe_from_path(filename, sep=",")
-    return dataframe
+    try:
+        # import csv into pandas dataframe by specifying the sep - seperator
+        dataframe = csv_import_adapter.import_dataframe_from_path(filename, sep=",")
+        return dataframe
+    except FileNotFoundError:
+        print("Invalid file name")
 
 def generate_xes_from_dataframe(dataframe):
-    # convert the csv imported in dataframe to xes log
-    xes_log = conversion_factory.apply(dataframe)
-    return xes_log
+    try:
+        # convert the csv imported in dataframe to xes log
+        xes_log = conversion_factory.apply(dataframe)
+        return xes_log
+    except Error:
+        print("Invalid input")
 
 def generate_inductive_miner_net(xes_log):
-    inductive_net, initial_marking, final_marking = inductive_miner.apply(xes_log)
-    return {'inductive_net': inductive_net,
+    try:
+        inductive_net, initial_marking, final_marking = inductive_miner.apply(xes_log)
+        return {'inductive_net': inductive_net,
             'initial_marking': initial_marking,
             'final_marking' : final_marking}
+    except AttributeError:
+        print("Please check input values")
 
 def generate_petri_net_visual(net, initial_marking, final_marking, xes_log):
-    # visualizing the petri net using graphviz library, by passing net initial and final marking and viewing it
-    parameters = {"format": "png"}
-    gviz = pn_vis_factory.apply(net, initial_marking, final_marking,
+    try:
+        # visualizing the petri net using graphviz library, by passing net initial and final marking and viewing it
+        parameters = {"format": "png"}
+        gviz = pn_vis_factory.apply(net, initial_marking, final_marking,
                                 parameters=parameters, variant="frequency", log=xes_log)
-    pn_vis_factory.view(gviz)
-    print("By what name do you want to save the petri net image?")
-    filename = str(input())
-    pn_vis_factory.save(gviz, filename+".png")
+        pn_vis_factory.view(gviz)
+        print("By what name do you want to save the petri net image?")
+        filename = str(input())
+        pn_vis_factory.save(gviz, filename+".png")
+    except TypeError:
+        print("Please check input values")
