@@ -3,6 +3,7 @@ import numpy as np
 from datetime import datetime
 from datetime import timedelta
 
+# function to format the epoch date format
 def format_date_column(data):
     existing_col = list(data);
     new_created_col = [];
@@ -12,6 +13,7 @@ def format_date_column(data):
         new_created_col.append(temp_str)
     return new_created_col
 
+# function to create the output file required by the algorithms
 def create_output_csv_file():
     print("Kindly enter the name of the file to be formatted")
     filename = str(input())

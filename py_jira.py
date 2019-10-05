@@ -2,6 +2,7 @@ from jira import JIRA
 import pandas as pd
 from format_input_file import create_output_csv_file
 
+# function to process the jira operations sub-menu
 def py_jira_menu(selected_option):
     if selected_option == '1':
         view_all_jira_projects()
@@ -12,6 +13,7 @@ def py_jira_menu(selected_option):
     elif selected_option == '5':
         exit()
 
+# function to display the jira operations sub-menu
 def py_jira_functions():
     while True:
         print("***********JIRA Sub-Menu**************\n"
@@ -25,7 +27,7 @@ def py_jira_functions():
             break
         py_jira_menu(selected_option)
 
-
+# function to connect to jira server
 def connect_to_jira_server(jira_url):
     # server name to connect to
     options = {
@@ -34,6 +36,7 @@ def connect_to_jira_server(jira_url):
     jira = JIRA(options)
     return jira
 
+# function to view all the jira projects on the provided jira link
 def view_all_jira_projects():
     try:
         print("Kindly enter the jira server URL, eg: https://jira.spring.io\n")
@@ -47,6 +50,7 @@ def view_all_jira_projects():
     except Exception:
         print("Please enter a valid URL")
 
+# function to generate csv file of specified
 def generate_csv_from_jira():
     print("Kindly enter the jira server URL, eg: https://jira.spring.io")
     try:

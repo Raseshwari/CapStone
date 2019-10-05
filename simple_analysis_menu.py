@@ -1,6 +1,7 @@
 from algorithms_main import *
 from format_input_file import create_output_csv_file
 
+# display the Simple Analysis option's sub-menu
 def simple_analysis_functions():
     while True:
         print("**********Simple Analysis Sub-Menu***********\n"

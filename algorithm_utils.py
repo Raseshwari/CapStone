@@ -16,6 +16,8 @@ from pm4py.algo.discovery.heuristics import factory as heuristics_miner
 from pm4py.visualization.heuristics_net import factory as hn_vis_factory
 from pm4py.algo.discovery.heuristics import factory as heuristics_miner
 import pandas as pd
+
+# function to generate dataframe from input csv file
 def generate_dataframe(filename):
     try:
         # import csv into pandas dataframe by specifying the sep - seperator
@@ -24,6 +26,7 @@ def generate_dataframe(filename):
     except FileNotFoundError:
         print("Invalid file name")
 
+# function to generate xes file from dataframe
 def generate_xes_from_dataframe(dataframe):
     try:
         # convert the csv imported in dataframe to xes log
@@ -32,6 +35,7 @@ def generate_xes_from_dataframe(dataframe):
     except Error:
         print("Invalid input")
 
+# function to generate inductive net, initial and final marking using inductive miner algorithm
 def generate_inductive_miner_net(xes_log):
     try:
         inductive_net, initial_marking, final_marking = inductive_miner.apply(xes_log)
@@ -41,6 +45,7 @@ def generate_inductive_miner_net(xes_log):
     except AttributeError:
         print("Please check input values")
 
+# function to generate petri net from the input params - net, initial, final marking and xes log
 def generate_petri_net_visual(net, initial_marking, final_marking, xes_log):
     try:
         # visualizing the petri net using graphviz library, by passing net initial and final marking and viewing it

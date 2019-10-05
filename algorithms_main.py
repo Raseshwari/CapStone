@@ -1,5 +1,6 @@
 from algorithm_utils import *
 
+# function to apply inductive miner algorithm
 def apply_inductive_miner_algorithm():
     try:
         print("Enter your train file name")
@@ -29,6 +30,7 @@ def apply_inductive_miner_algorithm():
         print("Please enter valid file name")
 
 
+# function to display and save petri net using the simple analysis option in main menu
 def display_petri_net_simple():
     try:
         print("Enter your file name")
