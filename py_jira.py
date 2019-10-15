@@ -19,7 +19,7 @@ def py_jira_functions():
         print("***********JIRA Sub-Menu**************\n"
               "1. View all JIRA projects\n"
               "2. Generate csv file of JIRA project\n"
-              "3. Format generated JIRA csv\n"
+              "3. Format generated JIRA / external csv\n"
               "4. Return to the previous menu\n"
               "5. Exit")
         selected_option = input()

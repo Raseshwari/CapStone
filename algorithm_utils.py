@@ -25,6 +25,7 @@ def generate_dataframe(filename):
         return dataframe
     except FileNotFoundError:
         print("Invalid file name")
+        exit()
 
 # function to generate xes file from dataframe
 def generate_xes_from_dataframe(dataframe):
@@ -35,6 +36,15 @@ def generate_xes_from_dataframe(dataframe):
     except Error:
         print("Invalid input")
 
+def generate_alpha_net(xes_log):
+    try:
+        alpha_net, initial_marking, final_marking = alpha_miner.apply(xes_log)
+        return {'alpha_net' : alpha_net,
+                'initial_marking': initial_marking,
+                'final_marking': final_marking}
+    except AttributeError:
+        print("Please check input values")
+
 # function to generate inductive net, initial and final marking using inductive miner algorithm
 def generate_inductive_miner_net(xes_log):
     try:
@@ -44,6 +54,39 @@ def generate_inductive_miner_net(xes_log):
             'final_marking' : final_marking}
     except AttributeError:
         print("Please check input values")
+
+def generate_simple_net(xes_log):
+    try:
+        simple_net, initial_marking, final_marking = simple_algorithm.apply(xes_log, classic_output=True,parameters={"max_no_variants": 20})
+        return {'simple_net': simple_net,
+                'initial_marking': initial_marking,
+                'final_marking': final_marking}
+    except AttributeError:
+        print("Please check your input values")
+
+def generate_heuristics_miner_net(xes_log):
+    try:
+        heu_net = heuristics_miner.apply_heu(xes_log)
+        gviz = hn_vis_factory.apply(heu_net)
+        hn_vis_factory.view(gviz)
+        return {'heu_net': heu_net}
+    except AttributeError:
+        print("Please check your input values")
+
+def generate_heuristics_petri_net(xes_log):
+    try:
+        heu_net, im, fm = heuristics_miner.apply(xes_log)
+        return {'heu_net': heu_net,
+            'initial_marking': im,
+            'final_marking': fm}
+    except AttributeError:
+        print("Please check your input values")
+
+def save_xes_to_disk(dataframe):
+    xes_log = generate_xes_from_dataframe(dataframe)
+    # export xes log file
+    xes_exporter.export_log(xes_log, "exportedLog.xes")
+    print("exported XES log file: exportedLog.xes")
 
 # function to generate petri net from the input params - net, initial, final marking and xes log
 def generate_petri_net_visual(net, initial_marking, final_marking, xes_log):
@@ -56,5 +99,17 @@ def generate_petri_net_visual(net, initial_marking, final_marking, xes_log):
         print("By what name do you want to save the petri net image?")
         filename = str(input())
         pn_vis_factory.save(gviz, filename+".png")
+    except TypeError:
+        print("Please check input values")
+
+def generate_replay_result(xes_test_log, petri_net_train, initial_marking, final_marking):
+    try:
+        # apply token replay to the net, initial and final marking
+        replay_result = token_replay.apply(xes_test_log, petri_net_train, initial_marking, final_marking)
+        print("replay result: "+ str(replay_result) +"\n")
+
+        # verify log fitness
+        log_fitness = replay_fitness_factory.evaluate(replay_result, variant="token_replay")
+        print("log_fitness"+str(log_fitness)+"\n")
     except TypeError:
         print("Please check input values")

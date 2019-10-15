@@ -1,5 +1,6 @@
 from py_jira import py_jira_functions
 from simple_analysis_menu import simple_analysis_functions
+from detailed_analysis_menu import detailed_analysis_functions
 
 # main menu to display the 4 core functionalities
 def menu(selected_option):
@@ -7,6 +8,8 @@ def menu(selected_option):
         py_jira_functions()
     if selected_option == '2':
         simple_analysis_functions()
+    if selected_option == '3':
+        detailed_analysis_functions()
     elif selected_option == '5':
         exit()
     else:

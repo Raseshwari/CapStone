@@ -26,7 +26,6 @@ def create_output_csv_file():
         print(data['updated'])
 
         # fetch required columns from the dataframe
-        activity = data['summary'];
         resource = data['reporter'];
         caseConceptName = data['status.description']
         caseCreator = data['creator']
