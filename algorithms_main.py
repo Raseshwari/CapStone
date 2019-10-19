@@ -151,3 +151,75 @@ def display_replay_log_fitness():
             print("Selected option invalid")
     except TypeError:
         print("Please enter valid file name")
+
+###########################################Social Network Analysis#############################################
+def work_handover():
+    try:
+        print("Kindly enter the name of your formatted file\n"
+          "Note: please include .csv file extension and make sure that input file has no blank rows or columns")
+        filename = str(input())
+        dataframe = csv_import_adapter.import_dataframe_from_path(filename, sep=",")
+        from pm4py.objects.conversion.log import factory as conversion_factory  # lib to convert csv to xes
+        log = conversion_factory.apply(dataframe)
+        from pm4py.algo.enhancement.sna import factory as sna_factory
+        hw_values = sna_factory.apply(log, variant="handover")
+        from pm4py.visualization.sna import factory as sna_vis_factory
+        gviz_hw_py = sna_vis_factory.apply(hw_values, variant="pyvis")
+        sna_vis_factory.view(gviz_hw_py, variant="pyvis")
+    except FileNotFoundError:
+        print("Please check your file name")
+
+def subcontracting_metric():
+    print("Kindly enter the name of your formatted file\n"
+          "Note: please include .csv file extension and make sure that input file has no blank rows or columns")
+    filename = str(input())
+
+    try:
+        dataframe = csv_import_adapter.import_dataframe_from_path(filename, sep=",")
+        from pm4py.objects.conversion.log import factory as conversion_factory  # lib to convert csv to xes
+        log = conversion_factory.apply(dataframe)
+
+        from pm4py.algo.enhancement.sna import factory as sna_factory
+        sub_values = sna_factory.apply(log, variant="subcontracting")
+        from pm4py.visualization.sna import factory as sna_vis_factory
+        gviz_sub_py = sna_vis_factory.apply(sub_values, variant="pyvis")
+        sna_vis_factory.view(gviz_sub_py, variant="pyvis")
+    except FileNotFoundError:
+        print("Please check your file name")
+
+
+def working_together_metric():
+    print("Kindly enter the name of your formatted file\n"
+          "Note: please include .csv file extension and make sure that input file has no blank rows or columns")
+    filename = str(input())
+
+    try:
+        dataframe = csv_import_adapter.import_dataframe_from_path(filename, sep=",")
+        from pm4py.objects.conversion.log import factory as conversion_factory  # lib to convert csv to xes
+        log = conversion_factory.apply(dataframe)
+
+        from pm4py.algo.enhancement.sna import factory as sna_factory
+        wt_values = sna_factory.apply(log, variant="working_together")
+        from pm4py.visualization.sna import factory as sna_vis_factory
+        gviz_sub_py = sna_vis_factory.apply(wt_values, variant="pyvis")
+        sna_vis_factory.view(gviz_sub_py, variant="pyvis")
+    except FileNotFoundError:
+        print("Please check your file name")
+
+def similar_activities_metric():
+    print("Kindly enter the name of your formatted file\n"
+          "Note: please include .csv file extension and make sure that input file has no blank rows or columns")
+    filename = str(input())
+
+    try:
+        dataframe = csv_import_adapter.import_dataframe_from_path(filename, sep=",")
+        from pm4py.objects.conversion.log import factory as conversion_factory  # lib to convert csv to xes
+        log = conversion_factory.apply(dataframe)
+
+        from pm4py.algo.enhancement.sna import factory as sna_factory
+        ja_values = sna_factory.apply(log, variant="jointactivities")
+        from pm4py.visualization.sna import factory as sna_vis_factory
+        gviz_ja_py = sna_vis_factory.apply(ja_values, variant="pyvis")
+        sna_vis_factory.view(gviz_ja_py, variant="pyvis")
+    except FileNotFoundError:
+        print("Please check your file name")

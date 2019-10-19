@@ -16,6 +16,11 @@ from pm4py.algo.discovery.heuristics import factory as heuristics_miner
 from pm4py.visualization.heuristics_net import factory as hn_vis_factory
 from pm4py.algo.discovery.heuristics import factory as heuristics_miner
 import pandas as pd
+#########Social Network Analysis###############################
+from pm4py.algo.enhancement.sna import factory as sna_factory
+from pm4py.visualization.sna import factory as sna_vis_factory
+from pm4py.objects.log.adapters.pandas import csv_import_adapter #lib to import csv file
+from format_input_file import *
 
 # function to generate dataframe from input csv file
 def generate_dataframe(filename):

@@ -1,6 +1,7 @@
 from py_jira import py_jira_functions
 from simple_analysis_menu import simple_analysis_functions
 from detailed_analysis_menu import detailed_analysis_functions
+from social_network_analysis_menu import social_network_analysis_functions
 
 # main menu to display the 4 core functionalities
 def menu(selected_option):
@@ -10,6 +11,8 @@ def menu(selected_option):
         simple_analysis_functions()
     if selected_option == '3':
         detailed_analysis_functions()
+    if selected_option == '4':
+        social_network_analysis_functions()
     elif selected_option == '5':
         exit()
     else:
@@ -26,7 +29,7 @@ def main():
               "4. Social Network Analysis\n"
               "5. Exit")
         selected_option = input()
-        if selected_option == '4':
+        if selected_option == '5':
             break
         menu(selected_option)
 
