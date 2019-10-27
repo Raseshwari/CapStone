@@ -20,7 +20,6 @@ def social_network_analysis_functions():
 
 
 def social_network_analysis_menu(selected_option):
-    print(selected_option)
     if selected_option == '1':
         work_handover()
     elif selected_option == '2':

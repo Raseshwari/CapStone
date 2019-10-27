@@ -19,7 +19,6 @@ def detailed_analysis_functions():
 
 
 def detailed_analysis_menu(selected_option):
-    print(selected_option)
     if selected_option == '1':
         save_xes_log_disk()
     elif selected_option == '2':
